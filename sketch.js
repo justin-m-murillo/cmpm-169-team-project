@@ -9,6 +9,7 @@ Contributors:
 
 ***********************************/
 // test variables
+// test variables
 let testB;
 let test;
 
@@ -17,10 +18,13 @@ let radius = 50;
 var isTheMousePressed = false;
 var bordorPlaced = false;
 
+// Array to store buildings
+let buildings = [];
+
 // Created by Vincent, represents a single building
 class Building {
   // Creates a building at x, y with max width and max height
-  constructor (x, y, width, height) {
+  constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.maxWidth = width
@@ -50,11 +54,11 @@ class Building {
 
 class Bordor {
   constructor(x, y, radius) {
-        this.x =  x;
-        this.y = y;
-        this.radius = radius;
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
   }
-    //update() {
+  //update() {
         //Compare all city's radius with this and check
         //for each border in array
         //if(radius doesn't collide with other radius) {
@@ -63,7 +67,7 @@ class Bordor {
     //}
   draw() {
     stroke(255);
-    if(isTheMousePressed && bordorPlaced == false) {
+    if (isTheMousePressed && bordorPlaced == false) {
       fill(0)
       ellipse(this.x, this.y, this.radius)
       bordorPlaced = true
@@ -77,8 +81,8 @@ function setup() {
 
 function draw() {
   //background(220);
-  if (testB) {
-    testB.draw();
+  for (let i = 0; i < buildings.length; i++) {
+    buildings[i].draw();
   }
   if (test) {
     test.draw();
@@ -86,20 +90,20 @@ function draw() {
 }
 
 function keyPressed() {
-  if(key == "1") {
+  if (key == "1") {
     radius = 50;
   }
-  if(key == "2") {
+  if (key == "2") {
     radius = 100;
   }
-  if(key == "3") {
+  if (key == "3") {
     radius = 150;
   }
 }
 
 function mousePressed() {
   isTheMousePressed = true;
-  testB = new Building(mouseX, mouseY, 100, 400);
+  buildings.push(new Building(mouseX, mouseY, 100, 400));
   test = new Bordor(mouseX, mouseY, radius);
 }
 
