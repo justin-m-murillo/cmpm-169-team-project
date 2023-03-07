@@ -8,11 +8,6 @@ Contributors:
   Vincent Kurniadjaja
 
 ***********************************/
-// test variables
-// test variables
-let testB;
-let test;
-
 // Variables for Border
 let radius = 100;
 var isTheMousePressed = false;
@@ -28,8 +23,12 @@ let buildSizeWidthMax = 20;
 let buildPosMin = (-radius/2) + 10;
 let buildPosMax = (radius/2) - 10;
 
+// Constants for Borders
+let BUILDING_TIMER = 200;
+
 // Array to store buildings
-let buildings = [];
+//let buildings = [];
+let borderList = []
 
 // Created by Vincent, represents a single building
 class Building {
@@ -44,6 +43,8 @@ class Building {
   }
 
   draw() {
+    fill(0);
+    stroke(122);
     rect(this.x - this.curWidth / 2, this.y - this.curHeight, this.curWidth, this.curHeight)
     this.tweenBuilding();
   }
@@ -93,6 +94,10 @@ class Bordor {
     this.x = x;
     this.y = y;
     this.radius = radius;
+    this.buildings = []
+
+    // Keeps track of adds a building per timer
+    this.buildingTimer = BUILDING_TIMER
   }
   //update() {
         //Compare all city's radius with this and check
@@ -101,12 +106,35 @@ class Bordor {
             //Radius += growth
         //}
     //}
+  
+  // Adds a building to the border
+  addBuilding() {
+    let buildingSize = floor(random(buildSizeWidthMin, buildSizeWidthMax));
+    let tempBuilding = new Building (this.x + random(-this.radius/2, this.radius/2), this.y + random(-this.radius/2, this.radius/2), buildingSize, buildingSize * 4);
+    this.buildings.push(tempBuilding);
+    this.buildings.sort((a,b) => a.y - b.y);
+  }
+
   draw() {
-    stroke(255);
+    stroke(0);
+    noFill()
+    ellipse(this.x, this.y, this.radius)
+    /*
     if (isTheMousePressed && bordorPlaced == false) {
-      fill(0)
+      noFill()
       ellipse(this.x, this.y, this.radius)
       bordorPlaced = true
+    } */
+    for (let i = 0; i < this.buildings.length; i++) {
+      this.buildings[i].draw();
+      print(true)
+    }
+
+    if (this.buildingTimer > 0) {
+      this.buildingTimer -= 1;
+    } else {
+      this.addBuilding();
+      this.buildingTimer = BUILDING_TIMER;
     }
   }
 }
@@ -117,11 +145,12 @@ function setup() {
 
 function draw() {
   //background(220);
+  /*
   for (let i = 0; i < buildings.length; i++) {
     buildings[i].draw();
-  }
-  if (test) {
-    test.draw();
+  }*/
+  for (let i = 0; i < borderList.length; i++) {
+    borderList[i].draw();
   }
 }
 
@@ -137,18 +166,22 @@ function keyPressed() {
   }
 }
 
+
 function mousePressed() {
-  isTheMousePressed = true;
+  //isTheMousePressed = true;
+  /*
   for (let i = 0; i < floor(random(4, 8)); i++) {
     let buildParams = Building.getBuildingParams();
     console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
     buildings.push(new Building(buildParams.x, buildParams.y, buildParams.w, buildParams.w * 4));
   }
-  buildings.sort((a,b) => a.y - b.y);
-  test = new Bordor(mouseX, mouseY, radius);
+  buildings.sort((a,b) => a.y - b.y);*/
+  let tempBorder = new Bordor(mouseX, mouseY, radius);
+  borderList.push(tempBorder);
 }
 
+/*
 function mouseReleased() {
   isTheMousePressed = false;
   bordorPlaced = false;
-}
+}*/
