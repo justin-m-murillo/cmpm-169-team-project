@@ -18,6 +18,16 @@ let radius = 50;
 var isTheMousePressed = false;
 var bordorPlaced = false;
 
+// VARIABLES FOR BUILDINGS
+// all max variables used for p5.random account for non-inclusiveness
+let buildSizeWidthMin = 5;
+let buildSizeWidthMax = 20;
+//let buildSizeHeightMin = 20;
+//let buildSizeHeightMax = 101;
+// using same parameters for the x and y positions
+let buildPosMin = (-radius/2) + 5;
+let buildPosMax = (radius/2) - 5;
+
 // Array to store buildings
 let buildings = [];
 
@@ -49,6 +59,32 @@ class Building {
     if (this.curWidth < this.maxWidth) {
       this.curWidth += widthRate
     }
+  }
+
+  static getBuildingParams() {
+    let buildWidth = floor(random(
+      buildSizeWidthMin, 
+      buildSizeWidthMax
+    ));
+    // let buildHeight = floor(random(
+    //   buildSizeHeightMin, 
+    //   buildSizeHeightMax
+    // ));
+    let xpos = floor(random(
+      mouseX + buildPosMin,
+      mouseX + buildPosMax
+    ));
+    let ypos = floor(random(
+      mouseY + buildPosMin,
+      mouseY + buildPosMax
+    ));
+    let buildParams = {
+      x: xpos,
+      y: ypos,
+      w: buildWidth
+      //h: buildHeight
+    }
+    return buildParams;
   }
 }
 
@@ -103,7 +139,12 @@ function keyPressed() {
 
 function mousePressed() {
   isTheMousePressed = true;
-  buildings.push(new Building(mouseX, mouseY, 100, 400));
+  for (let i = 0; i < floor(random(4, 8)); i++) {
+    let buildParams = Building.getBuildingParams();
+    console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
+    buildings.push(new Building(buildParams.x, buildParams.y, buildParams.w, buildParams.w * 4));
+  }
+  buildings.sort((a,b) => a.y - b.y);
   test = new Bordor(mouseX, mouseY, radius);
 }
 
