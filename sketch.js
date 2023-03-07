@@ -24,7 +24,7 @@ let buildPosMin = (-radius/2) + 10;
 let buildPosMax = (radius/2) - 10;
 
 // Constants for Borders
-let BUILDING_TIMER = 200;
+let BUILDING_TIMER = 50;
 
 // Array to store buildings
 //let buildings = [];
@@ -94,6 +94,7 @@ class Bordor {
     this.x = x;
     this.y = y;
     this.radius = radius;
+    this.maxRadius = this.radius + 100;
     this.buildings = []
 
     // Keeps track of adds a building per timer
@@ -136,6 +137,14 @@ class Bordor {
       this.addBuilding();
       this.buildingTimer = BUILDING_TIMER;
     }
+
+    this.growBorder();
+  }
+
+  growBorder() {
+    if (this.radius < this.maxRadius) {
+      this.radius += 0.5;
+    }
   }
 }
 
@@ -144,7 +153,7 @@ function setup() {
 }
 
 function draw() {
-  //background(220);
+  background(255);
   /*
   for (let i = 0; i < buildings.length; i++) {
     buildings[i].draw();
