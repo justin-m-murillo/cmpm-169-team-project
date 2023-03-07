@@ -14,7 +14,7 @@ let testB;
 let test;
 
 // Variables for Border
-let radius = 50;
+let radius = 100;
 var isTheMousePressed = false;
 var bordorPlaced = false;
 
@@ -25,8 +25,8 @@ let buildSizeWidthMax = 20;
 //let buildSizeHeightMin = 20;
 //let buildSizeHeightMax = 101;
 // using same parameters for the x and y positions
-let buildPosMin = (-radius/2) + 5;
-let buildPosMax = (radius/2) - 5;
+let buildPosMin = (-radius/2) + 10;
+let buildPosMax = (radius/2) - 10;
 
 // Array to store buildings
 let buildings = [];
