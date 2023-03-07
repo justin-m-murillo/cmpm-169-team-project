@@ -73,14 +73,16 @@ class Bordor {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  testB = new Building(width/2, height/2, 100, 400);
 }
 
 function draw() {
   //background(220);
-  testB.draw();
-  test = new Bordor(mouseX, mouseY, radius);
-  test.draw();
+  if (testB) {
+    testB.draw();
+  }
+  if (test) {
+    test.draw();
+  }
 }
 
 function keyPressed() {
@@ -97,6 +99,8 @@ function keyPressed() {
 
 function mousePressed() {
   isTheMousePressed = true;
+  testB = new Building(mouseX, mouseY, 100, 400);
+  test = new Bordor(mouseX, mouseY, radius);
 }
 
 function mouseReleased() {
