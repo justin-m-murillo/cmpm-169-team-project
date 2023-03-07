@@ -9,9 +9,16 @@ Contributors:
 
 ***********************************/
 // Variables for Border
-let radius = 100;
 var isTheMousePressed = false;
-var bordorPlaced = false;
+var borderPlaced = false;
+let borderGrowthSpeed = 0.1;
+let d
+let radius
+
+let mouseX1
+let mouseY1
+let mouseX2
+let mouseY2
 
 // VARIABLES FOR BUILDINGS
 // all max variables used for p5.random account for non-inclusiveness
@@ -20,14 +27,14 @@ let buildSizeWidthMax = 20;
 //let buildSizeHeightMin = 20;
 //let buildSizeHeightMax = 101;
 // using same parameters for the x and y positions
-let buildPosMin = (-radius/2) + 10;
-let buildPosMax = (radius/2) - 10;
+  let buildPosMin = (-radius/2) + 10;
+  let buildPosMax = (radius/2) - 10;
 
 // Constants for Borders
 let BUILDING_TIMER = 50;
 
 // Array to store buildings
-//let buildings = [];
+let buildings = [];
 let borderList = []
 
 // Created by Vincent, represents a single building
@@ -72,12 +79,12 @@ class Building {
     //   buildSizeHeightMax
     // ));
     let xpos = floor(random(
-      mouseX + buildPosMin,
-      mouseX + buildPosMax
+      mouseX1 + buildPosMin,
+      mouseX1 + buildPosMax
     ));
     let ypos = floor(random(
-      mouseY + buildPosMin,
-      mouseY + buildPosMax
+      mouseY1 + buildPosMin,
+      mouseY1 + buildPosMax
     ));
     let buildParams = {
       x: xpos,
@@ -89,7 +96,7 @@ class Building {
   }
 }
 
-class Bordor {
+class Border {
   constructor(x, y, radius) {
     this.x = x;
     this.y = y;
@@ -143,7 +150,7 @@ class Bordor {
 
   growBorder() {
     if (this.radius < this.maxRadius) {
-      this.radius += 0.5;
+      this.radius += borderGrowthSpeed;
     }
   }
 }
@@ -163,34 +170,30 @@ function draw() {
   }
 }
 
-function keyPressed() {
-  if (key == "1") {
-    radius = 50;
-  }
-  if (key == "2") {
-    radius = 100;
-  }
-  if (key == "3") {
-    radius = 150;
-  }
+function mousePressed() {
+  isTheMousePressed = true;
+
+  buildings.sort((a,b) => a.y - b.y);
+  mouseX1 = mouseX;
+  mouseY1 = mouseY;
+  centerX = mouseX;
+  centerY = mouseY;
 }
 
 
-function mousePressed() {
-  //isTheMousePressed = true;
-  /*
+function mouseReleased() {
   for (let i = 0; i < floor(random(4, 8)); i++) {
     let buildParams = Building.getBuildingParams();
-    console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
+    //console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
     buildings.push(new Building(buildParams.x, buildParams.y, buildParams.w, buildParams.w * 4));
   }
-  buildings.sort((a,b) => a.y - b.y);*/
-  let tempBorder = new Bordor(mouseX, mouseY, radius);
-  borderList.push(tempBorder);
-}
+  mouseX2 = mouseX;
+  mouseY2 = mouseY;
+  d = dist(mouseX1, mouseY1, mouseX2, mouseY2);
+  radius = d * 2
 
-/*
-function mouseReleased() {
+  test = new Border(mouseX1, mouseY1, radius);
+  borderList.push(test);
   isTheMousePressed = false;
-  bordorPlaced = false;
-}*/
+  borderPlaced = false;
+}
