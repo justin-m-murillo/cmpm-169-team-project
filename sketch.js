@@ -103,7 +103,7 @@ class Border {
     this.radius = radius;
     this.maxRadius = this.radius + 100;
     this.buildings = []
-    this.growing = true;
+    this.growing = true; // bool to determine if it should grow or not
 
     // Keeps track of adds a building per timer
     this.buildingTimer = BUILDING_TIMER
@@ -176,6 +176,7 @@ function draw() {
     borderList[i].draw();
   }
 
+  //determines if one border is hitting the other and sets their growth to false
   for (let i = 0; i < borderList.length; i++) {
     for (let j = i + 1; j < borderList.length; j++) {
       let distanceBetweenCircles = dist(borderList[i].x, borderList[i].y, borderList[j].x, borderList[j].y);
