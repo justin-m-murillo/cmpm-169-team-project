@@ -153,11 +153,11 @@ class Border {
   }
 
   growBorder() {
-      if (this.radius < this.maxRadius) {
+      //if (this.radius < this.maxRadius) {
         if (this.growing) {
           this.radius += borderGrowthSpeed;
       }
-    }
+    //}
   }
 }
 
