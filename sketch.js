@@ -103,6 +103,7 @@ class Border {
     this.radius = radius;
     this.maxRadius = this.radius + 100;
     this.buildings = []
+    this.growing = true;
 
     // Keeps track of adds a building per timer
     this.buildingTimer = BUILDING_TIMER
@@ -138,19 +139,24 @@ class Border {
       print(true)
     }
 
+    
+
     if (this.buildingTimer > 0) {
       this.buildingTimer -= 1;
     } else {
       this.addBuilding();
       this.buildingTimer = BUILDING_TIMER;
     }
-
+ 
     this.growBorder();
+    
   }
 
   growBorder() {
-    if (this.radius < this.maxRadius) {
-      this.radius += borderGrowthSpeed;
+      if (this.radius < this.maxRadius) {
+        if (this.growing) {
+          this.radius += borderGrowthSpeed;
+      }
     }
   }
 }
@@ -165,8 +171,19 @@ function draw() {
   for (let i = 0; i < buildings.length; i++) {
     buildings[i].draw();
   }*/
+  
   for (let i = 0; i < borderList.length; i++) {
     borderList[i].draw();
+  }
+
+  for (let i = 0; i < borderList.length; i++) {
+    for (let j = i + 1; j < borderList.length; j++) {
+      let distanceBetweenCircles = dist(borderList[i].x, borderList[i].y, borderList[j].x, borderList[j].y);
+      if (distanceBetweenCircles < (borderList[i].radius + borderList[j].radius)/2) {
+        borderList[i].growing = false;
+        borderList[j].growing = false;
+      }
+    }
   }
 }
 
@@ -182,15 +199,15 @@ function mousePressed() {
 
 
 function mouseReleased() {
-  for (let i = 0; i < floor(random(4, 8)); i++) {
-    let buildParams = Building.getBuildingParams();
-    //console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
-    buildings.push(new Building(buildParams.x, buildParams.y, buildParams.w, buildParams.w * 4));
-  }
+  // for (let i = 0; i < floor(random(4, 8)); i++) {
+  //   let buildParams = Building.getBuildingParams();
+  //   //console.log(`(${buildParams.x}, ${buildParams.y}) ${buildParams.w} ${buildParams.w * 4}`);
+  //   buildings.push(new Building(buildParams.x, buildParams.y, buildParams.w, buildParams.w * 4));
+  // }
   mouseX2 = mouseX;
   mouseY2 = mouseY;
   d = dist(mouseX1, mouseY1, mouseX2, mouseY2);
-  radius = d * 2
+  radius = d * 2;
 
   test = new Border(mouseX1, mouseY1, radius);
   borderList.push(test);
