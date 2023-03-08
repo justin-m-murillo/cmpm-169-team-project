@@ -7,24 +7,11 @@ class Border {
       this.growing = true; // bool to determine if it should grow or not
 
     }
-    //update() {
-          //Compare all city's radius with this and check
-          //for each border in array
-          //if(radius doesn't collide with other radius) {
-              //Radius += growth
-          //}
-      //}
     
     draw() {
       stroke(0);
       noFill()
-      ellipse(this.x, this.y, this.radius)
-      /*
-      if (isTheMousePressed && bordorPlaced == false) {
-        noFill()
-        ellipse(this.x, this.y, this.radius)
-        bordorPlaced = true
-      } */
+      ellipse(this.x, this.y, this.radius);
       
       this.growBorder();
     }

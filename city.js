@@ -40,20 +40,8 @@ class City {
             buildingSize,
             buildingSize * 4
         );
-        //let tempBuilding = new Building (this.x + random(-this.border.radius/2, this.border.radius/2), this.y + random(-this.radius/2, this.radius/2), buildingSize, buildingSize * 4);
         this.buildings.push(newBuilding);
         this.buildings.sort((a,b) => a.y - b.y);
-    }
-
-    pushBuilding(newBuilding) {
-        for (let i = 0; i < this.buildings.length; i++) {
-            if (newBuilding.y < this.buildings[i]) {
-                this.buildings.splice(i, 0, newBuilding);
-                return;
-            }
-        }
-
-        this.buildings.push(newBuilding);
     }
 
     static get BUILDING_TIMER() {
