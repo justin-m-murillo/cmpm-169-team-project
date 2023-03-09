@@ -3,7 +3,7 @@ class Border {
       this.x = x;
       this.y = y;
       this.radius = radius;
-      this.maxRadius = this.radius + 100;
+      //this.maxRadius = this.radius + 100;
       this.growing = true; // bool to determine if it should grow or not
 
     }

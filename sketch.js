@@ -58,7 +58,7 @@ function mouseReleased() {
   mouseY2 = mouseY;
   d = dist(mouseX1, mouseY1, mouseX2, mouseY2);
   radius = d * 2;
-
+  print(radius);
   test = new City(mouseX1, mouseY1, radius);
   cityList.push(test);
   isTheMousePressed = false;
