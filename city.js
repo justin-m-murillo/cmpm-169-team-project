@@ -12,19 +12,30 @@ class City {
     }
 
     update() {
+        this.area = PI * (this.border.radius * this.border.radius)
+        this.border.draw();
+
         for (let i = 0; i < this.buildings.length; i++) {
             this.buildings[i].draw();
-            print(true)
-          }
-      
-          if (this.buildingTimer > 0) {
-            this.buildingTimer -= 1;
-          } else {
-            this.addBuilding();
-            this.buildingTimer = BUILDING_TIMER;
+            //print(true)
         }
 
-        this.border.draw();
+        //print("radius: " + this.border.radius)
+        //print(this.buildings.length)
+        //print("area of border: " + this.buildings.length/this.area);
+        if(this.border.radius / 3 > this.buildings.length) {
+            if (this.buildingTimer > 0) {
+                this.buildingTimer -= 1;
+            } else {
+                this.addBuilding();
+                this.buildingTimer = BUILDING_TIMER;
+            }
+        }
+        else {
+            print("cant build");
+        }
+
+
     }
 
     // Adds a building to the border
