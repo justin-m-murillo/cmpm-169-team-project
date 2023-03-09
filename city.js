@@ -14,12 +14,14 @@ class City {
 
     update() {
         this.area = PI * (this.border.radius * this.border.radius)
+        this.border.draw();
+
         for (let i = 0; i < this.buildings.length; i++) {
             this.buildings[i].draw();
             //print(true)
         }
 
-        print("radius: " + this.border.radius)
+        //print("radius: " + this.border.radius)
         //print(this.buildings.length)
         //print("area of border: " + this.buildings.length/this.area);
         if(this.border.radius / 3 > this.buildings.length) {
@@ -35,7 +37,6 @@ class City {
         }
 
 
-        this.border.draw();
     }
 
     // Adds a building to the border
