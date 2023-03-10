@@ -11,14 +11,19 @@ class City {
       this.buildingTimer = BUILDING_TIMER
     }
 
-    update() {
-        this.area = PI * (this.border.radius * this.border.radius)
+    drawBorder() {
         this.border.draw();
+    }
 
+    drawBuildings() {
         for (let i = 0; i < this.buildings.length; i++) {
             this.buildings[i].draw();
             //print(true)
         }
+    }
+
+    update() {
+        this.area = PI * (this.border.radius * this.border.radius)
 
         //print("radius: " + this.border.radius)
         //print(this.buildings.length)
@@ -34,8 +39,6 @@ class City {
         else {
             print("cant build");
         }
-
-
     }
 
     // Adds a building to the border

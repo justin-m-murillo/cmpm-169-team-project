@@ -28,9 +28,9 @@ function setup() {
 function draw() {
   background(255);
 
-  for (let i = 0; i < cityList.length; i++) {
-    cityList[i].update();
-  }
+  cityList.forEach(city => city.drawBorder());
+  cityList.forEach(city => city.drawBuildings());
+  cityList.forEach(city => city.update());
 
   for (let i = 0; i < cityList.length; i++) {
     for (let j = i + 1; j < cityList.length; j++) {
