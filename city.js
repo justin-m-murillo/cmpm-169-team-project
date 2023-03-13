@@ -19,7 +19,18 @@ class City {
         for (let i = 0; i < this.buildings.length; i++) {
             this.buildings[i].draw();
             //print(true)
+            for (let j = i + 1; j < this.buildings.length; j++) {
+                // get distance between the two buildings
+                let d = dist(this.buildings[i].x, this.buildings[i].y, this.buildings[j].x, this.buildings[j].y);
+                // If the distance is less than a certain threshold, draw a road between them
+                if (d < 70) {
+                  stroke(0);
+                  line(this.buildings[i].x, this.buildings[i].y, this.buildings[j].x, this.buildings[j].y);
+                  break;
+                }
+              }
         }
+        
     }
 
     update() {
