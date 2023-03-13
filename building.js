@@ -13,10 +13,11 @@ class Building {
       this.curWidth = 0;
       this.maxHeight = height;
       this.curHeight = 0;
+      
     }
   
     draw() {
-      fill(0);
+      //fill(0);
       stroke(122);
       rect(this.x - this.curWidth / 2, this.y - this.curHeight, this.curWidth, this.curHeight)
       this.tweenBuilding();
