@@ -22,7 +22,7 @@ class Border {
     draw() {
       push()
       noStroke();
-      fill(this.color[0], this.color[1], this.color[2], this.color[3])
+      //fill(this.color[0], this.color[1], this.color[2], this.color[3])
       ellipse(this.x, this.y, this.radius);
       pop()
       this.growBorder();
